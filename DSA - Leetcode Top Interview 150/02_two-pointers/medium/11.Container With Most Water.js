@@ -22,4 +22,28 @@
     Input: height = [1,1]
     Output: 1
  */
-var maxArea = function (height) {};
+
+var maxArea = function (heights) {
+  let left = 0;
+  let right = heights.length - 1;
+  let maxArea = 0;
+
+  while (left < right) {
+    // Calculate the current area
+    let area = (right - left) * Math.min(heights[left], heights[right]);
+
+    // Update maxArea if the current area is larger
+    maxArea = Math.max(maxArea, area);
+
+    // Move the pointer that points to the smaller height inward
+    if (heights[left] < heights[right]) {
+      left++;
+    } else {
+      right--;
+    }
+  }
+
+  return maxArea;
+};
+
+console.log(maxArea([1, 8, 6, 2, 5, 4, 8, 3, 7])); // 49
